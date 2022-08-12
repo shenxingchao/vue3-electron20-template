@@ -1,0 +1,63 @@
+{
+  "name": "vue3-electron20-template",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/background.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "electron": "wait-on tcp:3000 && cross-env NODE_ENV=development electron .",
+    "electron:serve": "concurrently -k \"yarn dev\"  \"yarn electron\"",
+    "electron:builder": "electron-builder",
+    "electron:build": "yarn build && yarn electron:builder"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.2.0",
+    "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^17.2.0",
+    "electron-builder": "^22.14.13",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0",
+    "vue-tsc": "^0.29.8",
+    "wait-on": "^6.0.1"
+  },
+  "build": {
+    "appId": "com.org.vue3-electron20-template",
+    "productName": "vue3-electron20-template",
+    "copyright": "Copyright © sxc",
+    "directories": {
+      "buildResources": "./assets_electron",
+      "output": "./dist_electron"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./public/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true,
+      "allowElevation": true,
+      "installerIcon": "./public/favicon.ico",
+      "uninstallerIcon": "./public/favicon.ico",
+      "installerHeaderIcon": "./public/favicon.ico",
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": false,
+      "shortcutName": "vue3-electron20-template"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://xxx.xxx.com/download/"
+      }
+    ]
+  }
+}
