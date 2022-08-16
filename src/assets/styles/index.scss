@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+//引入element plus样式
+@use 'element-plus/theme-chalk/src/index' as *;
+//暗黑主题
+@use 'element-plus/theme-chalk/src/dark/css-vars' as *;
+
+* {
+  user-select: none;
+}
+
 //滚动条样式
 ::-webkit-scrollbar {
   width: 10px;
@@ -20,6 +29,3 @@
   background: #ededed;
   border-radius: 10px;
 }
-
-//引入element plus样式
-@import 'element-plus/theme-chalk/src/index';

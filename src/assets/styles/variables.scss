@@ -2,7 +2,24 @@
 @forward 'element-plus/theme-chalk/src/common/var.scss' with (
   $colors: (
     'primary': (
-      'base': #f6320f
+      'base': #ec4141
     )
+  ),
+  $bg-color: (
+    'page': #fafafa
   )
 );
+
+@use './dark.scss' as *;
+
+//自定义颜色
+html {
+  --h1: #333333;
+  --h2: #666666;
+  --h3: #999999;
+}
+
+$theme: var(--el-color-primary);
+$theme-light: var(--el-color-primary-light-3);
+$theme-dark: var(--el-color-primary-dark-2);
+$border-raduis: 4px;

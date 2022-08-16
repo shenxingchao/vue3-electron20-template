@@ -1,0 +1,18 @@
+// @use './variables.scss' as *;
+@forward 'element-plus/theme-chalk/src/dark/var.scss' with (
+  //暗黑模式下需要重写的变量
+  $colors:
+    (
+      'primary': (
+        'base': #212124
+      )
+    ),
+  //等同于覆盖--el-bg-color-page
+  $bg-color: ('page': #2b2b2b, '': #393939, 'overlay': #393939)
+);
+html.dark {
+  //自定义颜色
+  --h1: #ffffff !important;
+  --h2: #dddddd !important;
+  --h3: #aaaaaa;
+}

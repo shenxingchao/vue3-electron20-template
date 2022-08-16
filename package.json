@@ -2,7 +2,7 @@
   "name": "vue3-electron20-template",
   "private": true,
   "version": "0.0.0",
-  "main": "src/background.ts",
+  "main": "src/background.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@electron/remote": "^2.0.8",
     "@element-plus/icons": "^0.0.11",
+    "@vueuse/electron": "^9.1.0",
     "axios": "0.27.2",
     "element-plus": "^2.1.7",
     "normalize.css": "8.0.1",
@@ -37,7 +38,8 @@
     "prettier": "^2.2.1",
     "sass": "^1.39.0",
     "sass-loader": "^13.0.2",
-    "typescript": "^4.5.4",
+    "typescript": "^4.7.4",
+    "unplugin-vue-define-options": "^0.9.2",
     "vite": "^3.0.7",
     "vue-tsc": "^0.40.1",
     "wait-on": "^6.0.1"
