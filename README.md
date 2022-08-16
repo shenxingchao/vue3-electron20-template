@@ -4,6 +4,10 @@
 
 nodejs版本 >= 16.16.0
 
+vue版本 3.2.37
+
+electron版本 20.0.2
+
 
 ### 问题一：package.json填写的监听端口需要和vite.config.ts配置的端口相同
 ### 问题二：打包不要启动杀毒软件,如电脑管家,否则报Cannot find module '@babel/types' or its corresponding type declarations.
