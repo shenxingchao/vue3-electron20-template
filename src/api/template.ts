@@ -1,15 +1,16 @@
-import request from '@/utils/request'
+import axiosInstance from '@/utils/request'
 
-export function get(params = {}) {
-  return request({
+//xxx = await get<Type>();
+export function get<T>(params = {}): Promise<T[]> {
+  return axiosInstance.request({
     url: 'xxx/getXXX',
     method: 'get',
     params: params
   })
 }
 
-export function add(data = {}) {
-  return request({
+export function add(data = {}): Promise<any> {
+  return axiosInstance.request({
     url: 'xxx/getXXX',
     method: 'post',
     data: data
