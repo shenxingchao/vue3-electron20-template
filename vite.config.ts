@@ -33,7 +33,16 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-        require('autoprefixer'), //css自动前缀
+        require('autoprefixer')({
+          overrideBrowserslist: [
+            'Android 4.1',
+            'iOS 7.1',
+            'Chrome > 31',
+            'ff > 31',
+            'ie >= 8',
+            '> 1%'
+          ]
+        }), //css自动前缀
         require('postcss-import') //支持@import写法
       ]
     },
