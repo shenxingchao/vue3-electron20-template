@@ -31,21 +31,6 @@ export default defineConfig({
   },
   //配置全局css https://cn.vitejs.dev/config/#css-preprocessoroptions
   css: {
-    postcss: {
-      plugins: [
-        require('autoprefixer')({
-          overrideBrowserslist: [
-            'Android 4.1',
-            'iOS 7.1',
-            'Chrome > 31',
-            'ff > 31',
-            'ie >= 8',
-            '> 1%'
-          ]
-        }), //css自动前缀
-        require('postcss-import') //支持@import写法
-      ]
-    },
     preprocessorOptions: {
       scss: {
         //注意这里sass变成了scss
