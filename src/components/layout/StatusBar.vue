@@ -162,6 +162,7 @@ defineExpose({})
         align-items: center;
 
         .logo {
+            color: #ffffff;
             -webkit-app-region: no-drag;
             cursor: pointer;
         }
@@ -184,12 +185,12 @@ defineExpose({})
                 background: $theme-dark;
             }
 
-            &:first-of-type {
+            &:nth-of-type(1) {
                 margin-left: 100px;
             }
 
-            &:last-child {
-                margin-left: 10px;
+            &:nth-of-type(2) {
+                margin-left: $inline-margin;
             }
         }
 

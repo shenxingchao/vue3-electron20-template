@@ -32,7 +32,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'), //预加载脚本：在渲染器进程加载前加载,这个脚本的作用就是获取node版本号...
       nodeIntegration: true, //集成node
-      contextIsolation: false
+      contextIsolation: false,
+      webSecurity: false
       // enableRemoteModule: true
     },
     show: false //解决第一次显示时画面闪烁问题

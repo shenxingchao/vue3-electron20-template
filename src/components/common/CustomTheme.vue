@@ -96,15 +96,15 @@ defineExpose({})
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    margin-left: -10px;
+    margin-left: -$inline-margin;
 
     .color-item {
         width: 40px;
         height: 40px;
-        border-radius: $border-raduis;
+        border-radius: $border-radius;
         cursor: pointer;
-        margin-left: 10px;
-        margin-top: 10px;
+        margin-left: $inline-margin;
+        margin-top: $inline-margin;
         box-sizing: border-box;
         display: flex;
         align-items: center;

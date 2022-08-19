@@ -12,7 +12,11 @@
 );
 html.dark {
   //自定义颜色
-  --h1: #ffffff !important;
-  --h2: #dddddd !important;
-  --h3: #aaaaaa;
+  --h1: #eeeeee;
+  --h2: #bbbbbb;
+  --h3: #888888;
+  --border-color: #333333;
+  --bg-color: #444444;
+  --bg-color-2: #555555;
+  --bg-color-3: var(--el-color-primary);
 }

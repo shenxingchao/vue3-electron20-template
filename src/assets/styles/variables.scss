@@ -6,7 +6,7 @@
     )
   ),
   $bg-color: (
-    'page': #fafafa
+    'page': #ffffff
   )
 );
 
@@ -14,12 +14,27 @@
 
 //自定义颜色
 html {
+  --font1: 20px;
+  --font2: 18px;
+  --font3: 14px;
+  --font4: 12px;
   --h1: #333333;
   --h2: #666666;
   --h3: #999999;
+  --border-color: #dcdcdc;
+  --bg-color: #eeeeee;
+  --bg-color-2: #aaaaaa;
+  --bg-color-3: #fafafa;
 }
 
 $theme: var(--el-color-primary);
 $theme-light: var(--el-color-primary-light-3);
 $theme-dark: var(--el-color-primary-dark-2);
-$border-raduis: 4px;
+$border-radius: 4px;
+$border: 1px solid var(--border-color);
+$block-padding: 20px;
+$inline-padding: 10px;
+$love-padding: 10px;
+$block-margin: 20px;
+$inline-margin: 10px;
+$love-margin: 10px;
