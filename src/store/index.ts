@@ -4,7 +4,10 @@ import { defineStore } from 'pinia'
 export const useStore = defineStore('globalStore', {
   //全局状态维护
   state: () => ({
-    routeList: [], //维护一个路由数组,用于判断是否可以返回或者前进
+    router: {
+      isBack: false, //是否可以返回
+      isForward: false //是否可以前进
+    },
     setting: {
       showDrawer: false //显示抽屉
     }, //系统设置
@@ -16,10 +19,6 @@ export const useStore = defineStore('globalStore', {
   getters: {},
   //动作
   actions: {
-    //改变路由数组
-    handleChangeRouteList(routeList: any) {
-      this.routeList = routeList
-    },
     //切换显示抽屉
     handleChangeDrawer() {
       this.setting.showDrawer = !this.setting.showDrawer

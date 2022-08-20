@@ -4,9 +4,9 @@
             <div class="logo" @click="router.replace('/')">
                 <slot name="title">默认状态栏标题</slot>
             </div>
-            <svg-icon icon-class="router_back" :class-name="isBack ? '' : 'icon-disabled'"
+            <svg-icon icon-class="router_back" :class-name="store.router.isBack ? '' : 'icon-disabled'"
                 @click="handleClickRouterBack()" />
-            <svg-icon icon-class="router_forward" :class-name="isForward ? '' : 'icon-disabled'"
+            <svg-icon icon-class="router_forward" :class-name="store.router.isForward ? '' : 'icon-disabled'"
                 @click="handleClickRouterForward()" />
         </div>
         <div class="tool-btn">
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, watch } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { useStore } from '@/store/index'
 import { useRouter, useRoute } from 'vue-router';
 import { useIpcRenderer } from '@vueuse/electron'
@@ -47,10 +47,8 @@ const router = useRouter()
 const route = useRoute()
 
 //数据对象
-let { max, isBack, isForward } = $(reactive({
+let { max } = $(reactive({
     max: false,//是否是最大化状态  用于恢复按钮显示
-    isBack: false,//是否可以返回
-    isForward: false//是否可以前进
 }))
 
 //初始化钩子
@@ -60,29 +58,6 @@ onMounted(() => {
     ipcRenderer.on('maximize-change', (event: any, arg: any) => {
         max = arg
     })
-})
-
-//数据实时计算显示，字符处理的用computed  涉及交互事件，异步处理，样式变化，符合条件逻辑处理，开销较大的用watch
-watch(store.routeList, (newValue, oldValue) => {
-    let activeIndex = newValue.findIndex((item: any) => item.active == true)
-
-    if (activeIndex == 0 && newValue.length == 1) {
-        //不能前进也不能返回
-        isBack = false
-        isForward = false
-    } else if (activeIndex == 0 && newValue.length > 1) {
-        //可以前进不能返回
-        isBack = false
-        isForward = true
-    } else if (activeIndex >= 1 && activeIndex < newValue.length - 1) {
-        //可以返回也可以前进
-        isBack = true
-        isForward = true
-    } else if (activeIndex >= 1 && activeIndex == newValue.length - 1) {
-        //可以返回不能前进
-        isBack = true
-        isForward = false
-    }
 })
 
 //方法
@@ -118,18 +93,18 @@ const handleClickToolBtn = (type: string) => {
 
 //点击路由返回按钮
 const handleClickRouterBack = () => {
-    if (!isBack) {
+    if (!store.router.isBack) {
         return false
     }
-    router.back()
+    window.history.back()
 }
 
 //点击路由前进按钮
 const handleClickRouterForward = () => {
-    if (!isForward) {
+    if (!store.router.isForward) {
         return false
     }
-    router.forward()
+    window.history.forward()
 }
 
 //这里导出的属性/方法可以在父组件使用
