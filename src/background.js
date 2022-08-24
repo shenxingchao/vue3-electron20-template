@@ -62,7 +62,7 @@ function createWindow() {
   const tray = new Tray(
     path.join(
       __dirname,
-      isDevelopment ? '../public/favicon.ico' : '../favicon.ico'
+      isDevelopment ? '../public/favicon.ico' : '../public/favicon.ico'
     )
   )
   const contextMenu = Menu.buildFromTemplate([
