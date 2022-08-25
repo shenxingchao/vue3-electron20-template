@@ -4,10 +4,6 @@
         <input v-model="msg" type="text" />
     </h1>
     <h1>
-        测试状态 {{ store.routeList.length + 1 }}
-        <button @click="handleClick()">改变状态</button>
-    </h1>
-    <h1>
         <!-- 使用svg -->
         <svg-icon icon-class="mini" />
         <!-- 使用el-icon -->
@@ -68,9 +64,6 @@ onMounted(() => {
 })
 
 //方法
-const handleClick = () => {
-    store.handleChangeRouteList(store.routeList.concat([1] as any))
-}
 
 //这里导出的属性/方法可以在父组件使用
 defineExpose({})
