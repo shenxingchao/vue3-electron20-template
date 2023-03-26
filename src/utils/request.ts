@@ -1,5 +1,7 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import { getToken } from '@/utils/auth'
+import { useStore } from '@/store/index'
+import { $_message } from './message'
 
 let baseURL = 'http://sanic-kuwo.o8o8o8.com/api/v1/'
 
@@ -11,7 +13,11 @@ const axiosInstance = axios.create({
 
 //请求拦截器
 axiosInstance.interceptors.request.use(
-  config => {
+  (config: any) => {
+    const store = useStore()
+    if (store.token) {
+      config.headers['token'] = getToken()
+    }
     return config
   },
   error => {
@@ -25,11 +31,9 @@ axiosInstance.interceptors.response.use(
   response => {
     const res = response.data
     if (res.code && res.code != 200) {
-      ElMessage({
+      $_message({
         message: res.msg || 'Error',
-        type: 'error',
-        duration: 5 * 1000,
-        offset: 68
+        type: 'error'
       })
       return Promise.reject(new Error(res.msg || 'Error'))
     } else {
@@ -38,10 +42,9 @@ axiosInstance.interceptors.response.use(
   },
   error => {
     console.log('err' + error) // for debug
-    ElMessage({
+    $_message({
       message: error.message,
-      type: 'error',
-      duration: 5 * 1000
+      type: 'error'
     })
     return Promise.reject(error)
   }

@@ -12,38 +12,24 @@
         </el-icon>
     </h1>
 </template>
-
+  
 <script setup lang="ts">
-import { ComponentInternalInstance, getCurrentInstance, onMounted, reactive } from 'vue'
-import { useStore } from '@/store/index'
-import { useRouter, useRoute } from 'vue-router';
+import { useStore } from "@/store/index"
+import { getCurrentInstance, onMounted, reactive } from "vue"
+import { useRoute, useRouter } from "vue-router"
 
 //属性接口定义方式
 export interface Props {
     propValue?: string
 }
 
-//组件配置 使用了插件
-defineOptions({
-    name: 'Template',
-})
-
 //定义属性，这样可以使用默认值
 const props = withDefaults(defineProps<Props>(), {
-    propValue: '',
-})
-
-//渲染进程里打开子窗口
-const { BrowserWindow } = require("@electron/remote")
-
-let win = new BrowserWindow({ width: 500, height: 500 })
-
-win.on('close', () => {
-    win = null
+    propValue: "",
 })
 
 //当前组件实例
-const { proxy } = getCurrentInstance() as ComponentInternalInstance
+const { proxy } = getCurrentInstance() as any
 
 //状态
 const store = useStore()
@@ -53,14 +39,21 @@ const store = useStore()
 const router = useRouter()
 const route = useRoute()
 
+//类型定义
+type dataType = {
+    msg: string
+}
+
 //数据对象
-let { msg } = $(reactive({
-    msg: '测试数据',
-}))
+let { msg }: dataType = $(
+    reactive({
+        msg: "测试数据",
+    })
+)
 
 //初始化钩子
 onMounted(() => {
-    msg = 'hello world'
+    msg = "hello world"
 })
 
 //方法
@@ -68,6 +61,6 @@ onMounted(() => {
 //这里导出的属性/方法可以在父组件使用
 defineExpose({})
 </script>
-
-<style lang="scss" scoped>
-</style>
+  
+<style lang="scss" scoped></style>
+  

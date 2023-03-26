@@ -4,3 +4,20 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+//定义preload里的函数类型
+declare interface Window {
+  ipcRenderer: {
+    invoke: (channel: string, ...args: any) => Promise<any>
+    send: (channel: string, ...args: any) => void
+    sendSync: (channel: string, ...args: any) => any
+    on: (
+      channel: string,
+      listener: (event: Electron.IpcRendererEvent, ...arg: any) => void
+    ) => Electron.IpcRenderer
+    once: (
+      channel: string,
+      listener: (event: Electron.IpcRendererEvent, ...arg: any) => void
+    ) => Electron.IpcRenderer
+  }
+}

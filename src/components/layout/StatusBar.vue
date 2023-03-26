@@ -2,7 +2,7 @@
     <div class="title-bar">
         <div class="title">
             <div class="logo" @click="router.replace('/')">
-                <slot name="title">默认状态栏标题</slot>
+                <slot name="title">应用标题</slot>
             </div>
             <svg-icon icon-class="router_back" :class-name="store.router.isBack ? '' : 'icon-disabled'"
                 @click="handleClickRouterBack()" />
@@ -10,10 +10,11 @@
                 @click="handleClickRouterForward()" />
         </div>
         <div class="tool-btn">
-            <svg-icon icon-class="theme" @click="handleClickCustomTheme()" />
+            <svg-icon title="重启" icon-class="refresh" @click="handleClickRefresh()" />
+            <svg-icon title="切换主题色" icon-class="theme" @click="handleClickCustomTheme()" />
             <svg-icon icon-class="setting" @click="handleClickSetting()" />
             <svg-icon icon-class="mini" @click="handleClickToolBtn('minimize')" />
-            <svg-icon :icon-class="max ? 'maxi_re' : 'maxi'" @click="handleClickToolBtn('maximize')" />
+            <svg-icon :icon-class="isMax ? 'maxi_re' : 'maxi'" @click="handleClickToolBtn('maximize')" />
             <svg-icon icon-class="close" @click="handleClickToolBtn('winclose')" />
         </div>
         <div class="title-line"></div>
@@ -21,22 +22,12 @@
     <!-- 主题弹窗 -->
     <custom-theme></custom-theme>
 </template>
-
-<script setup lang="ts">
-import { onMounted, reactive } from 'vue'
-import { useStore } from '@/store/index'
-import { useRouter, useRoute } from 'vue-router';
-import { useIpcRenderer } from '@vueuse/electron'
-
-import CustomTheme from '@/components/common/CustomTheme.vue'
-
-//组件配置 使用了插件
-defineOptions({
-    name: 'StatusBar',
-})
-
-//从渲染器进程到主进程的异步通信
-const ipcRenderer = useIpcRenderer()
+  
+<script setup lang="ts" name="StatusBar">
+import { onMounted, reactive } from "vue"
+import { useStore } from "@/store/index"
+import { useRouter, useRoute } from "vue-router"
+import CustomTheme from "@/components/common/CustomTheme.vue"
 
 //状态
 const store = useStore()
@@ -47,20 +38,27 @@ const router = useRouter()
 const route = useRoute()
 
 //数据对象
-let { max } = $(reactive({
-    max: false,//是否是最大化状态  用于恢复按钮显示
-}))
+let { isMax } = $(
+    reactive({
+        isMax: false, //是否是最大化状态  用于恢复按钮显示
+    })
+)
 
 //初始化钩子
-onMounted(() => {
+onMounted(async () => {
     //监听最大化状态变化 去改变最大化或者是恢复按钮
-    ipcRenderer.send('listen-maximize')
-    ipcRenderer.on('maximize-change', (event: any, arg: any) => {
-        max = arg
+    window.ipcRenderer.send("listen-maximize")
+    window.ipcRenderer.on("maximize-change", (event: any, arg: any) => {
+        isMax = arg
     })
 })
 
 //方法
+//重启刷新
+const handleClickRefresh = async () => {
+    //刷新
+    window.location.reload()
+}
 //打开主题色设置
 const handleClickCustomTheme = () => {
     store.handleChangeCustomThemeDialog()
@@ -72,19 +70,19 @@ const handleClickSetting = () => {
 }
 
 //窗口操作
-const handleClickToolBtn = (type: string) => {
+const handleClickToolBtn = async (type: string) => {
     switch (type) {
         // 最小化
-        case 'minimize':
-            ipcRenderer.send('win-min', '')
+        case "minimize":
+            window.ipcRenderer.invoke("mainWin-min")
             break
         // 最大化
-        case 'maximize':
-            ipcRenderer.send('win-max', '')
+        case "maximize":
+            window.ipcRenderer.invoke("mainWin-max")
             break
         // 关闭
-        case 'winclose':
-            ipcRenderer.send('win-close', '')
+        case "winclose":
+            window.ipcRenderer.invoke("mainWin-close")
             break
         default:
             break
@@ -110,7 +108,7 @@ const handleClickRouterForward = () => {
 //这里导出的属性/方法可以在父组件使用
 defineExpose({})
 </script>
-
+  
 <style lang="scss" scoped>
 .title-bar {
     width: calc(100% - 40px);
@@ -188,7 +186,7 @@ defineExpose({})
     }
 
     .tool-btn {
-        width: 200px;
+        width: 250px;
         height: 60px;
         display: flex;
         justify-content: space-between;
@@ -234,7 +232,7 @@ defineExpose({})
     }
 
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -244,3 +242,4 @@ defineExpose({})
     }
 }
 </style>
+  

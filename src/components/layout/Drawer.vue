@@ -1,5 +1,5 @@
 <template>
-    <el-drawer custom-class="drawer" v-model="store.setting.showDrawer" :with-header="false">
+    <el-drawer class="drawer" v-model="store.setting.showDrawer" :with-header="false">
         <el-row class="version">
             当前版本:{{ packageJson.version }}
         </el-row>
@@ -9,16 +9,11 @@
     </el-drawer>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Drawer">
 import { onMounted, reactive } from 'vue'
 import { useStore } from '@/store/index'
 import packageJson from '@/../package.json'
 import ToggleTheme from '@/components/common/ToggleTheme.vue'
-
-//组件配置 使用了插件
-defineOptions({
-    name: 'Drawer',
-})
 
 //状态
 const store = useStore()

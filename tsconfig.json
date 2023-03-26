@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -17,15 +17,14 @@
       "@/*": ["src/*"]
     },
     "lib": ["esnext", "dom"],
-    "types": ["unplugin-vue-define-options", "vue/macros-global"]
+    "types": ["vue/macros-global"]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "src/background.js",
-    "src/preload.js"
+    "electron/**/*.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

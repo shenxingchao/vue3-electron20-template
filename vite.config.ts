@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-
 import { svgBuilder } from './src/plugins/svgBuilder'
-
-import DefineOptions from 'unplugin-vue-define-options/vite'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,7 +18,7 @@ export default defineConfig({
       reactivityTransform: true
     }),
     svgBuilder('./src/assets/svg/'), //svg加载插件 https://segmentfault.com/a/1190000039255368?utm_source=tag-newest
-    DefineOptions() //用来定义组件名称
+    vueSetupExtend()
   ],
   //解析
   resolve: {

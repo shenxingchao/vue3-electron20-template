@@ -5,7 +5,7 @@
   </svg>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="SvgIcon">
 import { computed, reactive } from 'vue'
 
 //属性接口定义方式
@@ -13,11 +13,6 @@ export interface Props {
   iconClass: string
   className?: string
 }
-
-//组件配置 使用了插件
-defineOptions({
-  name: 'SvgIcon',
-})
 
 //定义属性，这样可以使用默认值
 const props = withDefaults(defineProps<Props>(), {

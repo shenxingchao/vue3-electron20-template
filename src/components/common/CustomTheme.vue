@@ -1,6 +1,6 @@
 <template>
-    <el-dialog custom-class="custom-theme-dialog" v-model="store.dialog.showCustomTheme" title="" :width="340"
-        top="68px" :show-close="false" :modal="false" center>
+    <el-dialog class="custom-theme-dialog" v-model="store.dialog.showCustomTheme" title="" :width="340" top="68px"
+        :show-close="false" :modal="false" center>
         <div class="custom-theme">
             <div v-for="(item, index) in colorList" :key="index" class="color-item" :style="{ 'background': item }"
                 @click="handleChangeTheme(item)">
@@ -12,15 +12,10 @@
     </el-dialog>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="CustomTheme">
 import { onMounted, reactive } from 'vue'
 import { useStore } from '@/store/index'
 import { mix } from '@/utils/theme'
-
-//组件配置 使用了插件
-defineOptions({
-    name: 'CustomTheme',
-})
 
 //状态
 const store = useStore()

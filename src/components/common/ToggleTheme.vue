@@ -3,14 +3,9 @@
     </el-switch>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="ToggleTheme">
 import { reactive } from 'vue'
 import { useDark, useStorage, useToggle } from '@vueuse/core'
-
-//组件配置 使用了插件
-defineOptions({
-    name: 'ToggleTheme',
-})
 
 //数据对象
 let { useDarkMode } = $(reactive({
@@ -37,5 +32,4 @@ const handleChangeTheme = (bool: boolean) => {
 defineExpose({})
 </script>
 
-<style>
-</style>
+<style></style>

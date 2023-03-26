@@ -2,10 +2,21 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import { useStore } from '@/store/index'
 
 const routes: Array<RouteRecordRaw> = [
+  //主窗口
+  //首页
   {
     path: '/',
-    name: 'Index',
-    component: () => import('@/views/Index.vue')
+    name: 'Main',
+    redirect: '/Index',
+    component: () => import('@/views/Main.vue'),
+    children: [
+      //首页
+      {
+        path: 'Index',
+        name: 'Index',
+        component: () => import('@/views/index/Index.vue')
+      }
+    ]
   }
 ]
 
